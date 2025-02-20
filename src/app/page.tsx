@@ -8,10 +8,10 @@ import Link from "next/link";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const awaitedSearchParams = await searchParams;
-  const page = awaitedSearchParams["page"] ?? "1";
+  const getParams = await searchParams;
+  const page = getParams["page"] ?? "1";
 
   const postsRes = await db
     .select()
