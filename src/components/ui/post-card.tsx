@@ -1,10 +1,9 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Post } from "@/db/schema";
 import { format } from "date-fns";
 import { BanknoteIcon, Calendar } from "lucide-react";
+import Image from "next/image";
 
 export function PostCard({
   title,
@@ -37,9 +36,11 @@ export function PostCard({
       <CardHeader className="flex flex-row items-start gap-4 space-y-0">
         <div className="h-12 w-12 rounded-lg overflow-hidden ">
           {image ? (
-            <img
+            <Image
               src={image || "/placeholder.svg"}
               alt={department}
+              width={48}
+              height={48}
               className="h-full w-full object-cover"
             />
           ) : (

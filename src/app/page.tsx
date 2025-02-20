@@ -1,4 +1,5 @@
 import Hero from "@/components/ui/hero";
+import PageNavigation from "@/components/ui/page-navigation";
 import { PostCard } from "@/components/ui/post-card";
 import { db } from "@/db/db";
 import { posts } from "@/db/schema";
@@ -9,10 +10,14 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const page = searchParams["page"] ?? "1";
-  const per_page = searchParams["per_page"] ?? "10";
+  const awaitedSearchParams = await searchParams;
+  const page = awaitedSearchParams["page"] ?? "1";
 
-  const postsRes = await db.select().from(posts).limit(10).offset(10);
+  const postsRes = await db
+    .select()
+    .from(posts)
+    .limit(10)
+    .offset(Number(page) * 10);
 
   return (
     <div className="flex flex-col mx-auto mt-10 max-w-3xl">
@@ -24,6 +29,10 @@ export default async function Home({
           </Link>
         </div>
       ))}
+
+      <div className="my-10">
+        <PageNavigation />
+      </div>
     </div>
   );
 }

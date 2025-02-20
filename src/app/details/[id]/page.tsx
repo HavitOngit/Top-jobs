@@ -1,8 +1,8 @@
+import { BackButton } from "@/components/ui/page-navigation";
 import { db } from "@/db/db";
 import { postsData } from "@/db/schema";
 import markdownToHtml from "@/lib/md-to-html";
 import { eq } from "drizzle-orm";
-import Link from "next/link";
 
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
@@ -37,11 +37,10 @@ export default async function Page({
   return (
     <main className="m-4 mt-20">
       <div className="prose mx-auto">
-        <div className="mb-4">
-          <Link href="/" className="no-underline">
-            <span className="text-3xl">←</span>
-          </Link>
+        <div className="my-10">
+          <BackButton />
         </div>
+
         <div
           className="[&table]:table-auto"
           dangerouslySetInnerHTML={{ __html: content }}
