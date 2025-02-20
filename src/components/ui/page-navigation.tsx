@@ -1,6 +1,7 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { ChevronLeftIcon, ChevronRightIcon, MoveLeftIcon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "./button";
 
 export default function PageNavigation({}) {
@@ -8,16 +9,25 @@ export default function PageNavigation({}) {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page") ?? "1");
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center mx-4">
       {page === 1 ? (
         <div></div>
       ) : (
-        <Button onClick={() => router.push(`?page=${page - 1}`)}>
+        <Button
+          variant={"outline"}
+          onClick={() => router.push(`?page=${page - 1}`)}
+        >
+          <ChevronLeftIcon />
           Previous
         </Button>
       )}
 
-      <Button onClick={() => router.push(`?page=${page + 1}`)}>Next</Button>
+      <p className="text-gray-600">{page}</p>
+
+      <Button onClick={() => router.push(`?page=${page + 1}`)}>
+        Next
+        <ChevronRightIcon />
+      </Button>
     </div>
   );
 }
@@ -27,10 +37,10 @@ export function BackButton() {
   return (
     <Button
       variant={"outline"}
-      className="text-3xl  text-center"
+      className="flex items-center justify-center"
       onClick={() => router.back()}
     >
-      ←
+      <MoveLeftIcon />
     </Button>
   );
 }

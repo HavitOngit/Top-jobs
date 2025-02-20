@@ -1,8 +1,8 @@
+import { FooterWraper } from "@/components/ui/footer-wraper";
+import HeroHeading from "@/components/ui/hero-heading";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HeroHeading from "@/components/ui/hero-heading";
-import Footer from "@/components/ui/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +31,10 @@ export default function RootLayout({
       >
         <HeroHeading />
         {children}
-        <Footer />
+
+        <div className="mx-auto max-w-4xl">
+          <FooterWraper />
+        </div>
       </body>
     </html>
   );
